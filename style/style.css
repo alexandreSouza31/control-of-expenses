@@ -1,4 +1,8 @@
-body{
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -6,6 +10,12 @@ body{
     justify-content: center;
 }
 
-main{
+main {
     flex-grow: 1;
+}
+
+section {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px auto;
 }
