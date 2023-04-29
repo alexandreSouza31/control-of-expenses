@@ -1,4 +1,8 @@
 //referenciar os elementos do html no js
+let total_incomes = document.querySelector(".total-incomes");
+let total_expenses = document.querySelector(".total-expenses");
+let balance = document.querySelector(".balance");
+
 let input_description = document.querySelector(".description");
 let input_amount = document.querySelector(".amount");
 let input_date = document.querySelector(".date");
@@ -8,10 +12,12 @@ let trash = `<i class="bi bi-trash3"></i>`;
 
 
 //criar uma array fictícia, chumbada inicialmente
-let dataTransactions = [
-    {id: 1, description: "salário", amount: 3000, date:"01-11-2022"},
-    {id: 2, description: "mochila", amount: -200, date:"01-04-2023"},
-    {id: 3, description: "lanche", amount: 70, date:"19-04-2023"}
+let data_transactions = [
+    { id: 1, description: "salário", amount: 3000, date: "01-11-2022" },
+    { id: 2, description: "mochila", amount: -200, date: "01-04-2023" },
+
+    { id: 3, description: "lanche", amount: 70, date: "10-04-2023" },
+
 ]
 
 const add_transaction = transaction => {
@@ -25,15 +31,36 @@ const add_transaction = transaction => {
 
     li.innerHTML =
         `
-            ${transaction.description}  <span>  ${operator}R$${amount_operator} ${formatDate(transaction.date)} ${trash}</span>
+        <span class='span-description'>${transaction.description}</span><span>${operator}R$${amount_operator}</span> <span>${formatDate(transaction.date)}</span> <span>${trash}</span>
         `
     ul.prepend(li);//prepend: mais nova em cima. append: mais antigas em cima
 }
 
-add_transaction(dataTransactions[2])
-add_transaction(dataTransactions[1])
-add_transaction(dataTransactions[0])
 
+const updateBalance = () => {//atualiza as informações gerais de despesas e receitas
+    const transactions_amounts = data_transactions
+        .map(transaction => transaction.amount);
+    const total_amount = transactions_amounts//soma entradas e saídas
+        .reduce((accumulator, transaction) => accumulator + transaction, 0)
+        .toFixed(2);
+    balance.innerHTML = total_amount;
+    const income_amount = transactions_amounts
+        .filter(value => value > 0)//soma só as entradas(maior que zero)
+        .reduce((accumulator, value) => accumulator + value, 0)
+        .toFixed(2);
+    total_incomes.innerHTML = income_amount;
+    const income_expense = Math.abs(transactions_amounts
+        .filter(value => value <= 0)//soma só as saídas(menor ou igual a zero)
+        .reduce((accumulator, value) => accumulator + value, 0))
+        .toFixed(2);
+    total_expenses.innerHTML = income_expense;
+}
+updateBalance()
+
+const init = () => {
+    data_transactions.forEach(add_transaction)
+}
+init()
 
 function formatDate(date) {
     return new Date(date).toLocaleDateString('pt-BR', { timeZone: 'UTC' });
