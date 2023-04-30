@@ -17,6 +17,7 @@ crossorigin="anonymous">
 href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
 <!--end bootstrap-->
 <link rel="stylesheet" href="style/style.css">
+<!-- <link rel="stylesheet" href="style/media-query.css"> -->
     <script src="/script/script.js" defer></script>
     <link rel="icon" type="image/png" sizes="32x32" href="./image/example.jpg">
     <title>control of expenses</title>
@@ -28,28 +29,30 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.c
     <main>
         <div class="container-total">
             <p>Saldo: </p>
-            <span class="balance">R$ 2000</span>
+            <span class="balance">R$ 0</span>
         </div>
         <section class="container-incomes-exepenses">
             <div class="incomes">
                 <p class="incomes-p" title="o que está chegando de dinheiro">Receitas: </p>
-                <span class="total-incomes">R$ 4000</span>
+                <span class="total-incomes">R$ 0</span>
             </div>
+            <div class="separete"></div>
             <div class="expenses">
                 <p class="expenses-p" title="o que está sendo descontado do dinheiro">Despesas: </p>
-                <span class="total-expenses">R$ 2000</span>
+                <span class="total-expenses">R$ 0</span>
             </div>
             
         </section>
     
-        <form action="#" class="container-add-transactions">
+        <form action="#" class="form-add-transactions">
             <label for="description">Descrição</label>
             <input type="text" class="description">
             <label for="amount">Valor</label>
             <input type="number"  class="amount">
             <label for="date">Data</label>
             <input type="date" class="date">
-            <button class="add-btn">adicionar</button>
+            <!-- <i class="bi bi-plus-square add-btn"></i> -->
+            <button class="add-btn">add</button>
         </form>
 
         <section class="container-show-transactions">
