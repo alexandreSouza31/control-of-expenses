@@ -31,7 +31,10 @@ const add_transaction = transaction => {
 
     li.innerHTML =
         `
-        <span class='span-description'>${transaction.description}</span><span>${operator}R$${amount_operator}</span> <span>${formatDate(transaction.date)}</span> <span>${trash}</span>
+        <span class='span-description'>${transaction.description}</span>
+        <span>${operator}R$${amount_operator}</span>
+        <span>${formatDate(transaction.date)}</span>
+        <span>${trash}</span>
         `
     ul.prepend(li);//prepend: mais nova em cima. append: mais antigas em cima
 }
@@ -44,21 +47,27 @@ const updateBalance = () => {//atualiza as informações gerais de despesas e re
         .reduce((accumulator, transaction) => accumulator + transaction, 0)
         .toFixed(2);
     balance.innerHTML = total_amount;
+    const CSSClass = total_amount <= 0 ? "minus" : "plus";
+    balance.classList.add(CSSClass);
+    
     const income_amount = transactions_amounts
         .filter(value => value > 0)//soma só as entradas(maior que zero)
         .reduce((accumulator, value) => accumulator + value, 0)
         .toFixed(2);
     total_incomes.innerHTML = income_amount;
+
     const income_expense = Math.abs(transactions_amounts
         .filter(value => value <= 0)//soma só as saídas(menor ou igual a zero)
         .reduce((accumulator, value) => accumulator + value, 0))
         .toFixed(2);
     total_expenses.innerHTML = income_expense;
 }
-updateBalance()
+
 
 const init = () => {
+    ul.innerHTML = "";//preciso zerar a ul pra não duplicar sempre que a init for chamada
     data_transactions.forEach(add_transaction)
+    updateBalance()
 }
 init()
 
@@ -67,15 +76,31 @@ function formatDate(date) {
 }
 
 //validar os campos
+const generateId = () => Math.round(Math.random() * 1000);//gera id aleatória
 
 add_btn.addEventListener("click", (e) => {
     e.preventDefault();
-    if (input_description.value == "" || input_amount.value == "" || input_date.value == "") {
-        alert("preencha")
 
+    const _input_description = input_description.value;
+    const _input_amount = input_amount.value;
+    const _input_date = input_date.value;
+    if (_input_description == "" || _input_amount == "" || _input_date == "") {
+        alert("preencha")
         return
+
     } else {
+        const transaction = {
+            id: generateId(),
+            description: _input_description,
+            amount: Number(_input_amount),
+            date: _input_date
+        }
+        console.log(transaction)
+        data_transactions.push(transaction)
+        init()
+
         alert("cadastro realizado")
         return
     }
+    
 })
