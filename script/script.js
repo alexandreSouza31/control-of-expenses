@@ -10,22 +10,50 @@ let add_btn = document.querySelector(".add-btn");
 let ul = document.querySelector(".transactions");
 
 
+let modal_edit = document.querySelector(".modal-edit");
+let form_add = document.querySelector(".form-add-transactions");
+const edit_input = document.querySelector(".edit-input");
+const edit_amount = document.querySelector(".edit-amount");
+const edit_date = document.querySelector(".edit-date");
+const save_btn = document.querySelector(".save-btn");
+const cancel_btn = document.querySelector(".cancel-btn");
+
+
 //criar uma array fictícia, chumbada inicialmente
 let data_transactions = [
     { id: 1, description: "salário", amount: 3000, date: "01-11-2022" },
     { id: 2, description: "mochila", amount: -200, date: "01-04-2023" },
-    
+
     { id: 3, description: "lanche", amount: -70, date: "10-04-2023" },
-    
+
 ]
 const deleteTransactions = id => {
     //vai retornar pelo filtro todas as transações que têm id diferente do id clicado.
-    data_transactions=data_transactions.filter(transaction=>transaction.id !==id)
+    data_transactions = data_transactions.filter(transaction => transaction.id !== id)
     init()
 }
 
+const editTransaction = (id) => {
+
+    let test = data_transactions.filter(transaction => transaction.id == id)
+    modal_edit.style.display = "flex";
+    edit_input.value = test[0].description
+    edit_amount.value = test[0].amount
+    edit_date.value=test[0].date
+
+    save_btn.addEventListener("click", () => {
+        test[0].description = edit_input.value;
+        test[0].amount = edit_amount.value;
+        test[0].date = edit_date.value;
+        modal_edit.style.display = "none";
+
+        init()
+        test = ""
+    })
+}
+
 const add_transaction = transaction => {
-    let trash = `<i class="bi bi-trash3" onClick='deleteTransactions(${transaction.id})'></i>`;
+    let trash = `<i class="bi bi-trash3" onClick='deleteTransactions(${transaction.id})' style:"z-index=1"></i>`;
     const operator = transaction.amount < 0 ? "-" : "+";//se for negativo mostra sinal de menos, se positivo, de mais
     //esse método Math.abs deixa só o número, mesmo que tenha string. 
     const amount_operator = Math.abs(transaction.amount);
@@ -34,11 +62,12 @@ const add_transaction = transaction => {
     li.classList.add(CSSClass);
 
     li.innerHTML =
-        `
-        <span class='span-description'>${transaction.description}</span>
-        <span>${operator}R$${amount_operator}</span>
-        <span>${formatDate(transaction.date)}</span>
-        ${trash}
+        `<li >
+            <span class='span-description'onClick='editTransaction(${transaction.id})'>${transaction.description}</span>
+            <span class='span-amount' onClick='editTransaction(${transaction.id})'>${operator}R$${amount_operator}</span>
+            <span onClick='editTransaction(${transaction.id})'>${formatDate(transaction.date)}</span>
+            ${trash}
+        </li>
         `
     ul.prepend(li);//prepend: mais nova em cima. append: mais antigas em cima
 }
@@ -51,7 +80,7 @@ const updateBalance = () => {//atualiza as informações gerais de despesas e re
         .reduce((accumulator, transaction) => accumulator + transaction, 0)
         .toFixed(2);
     balance.innerHTML = total_amount;
-    
+
     const income_amount = transactions_amounts
         .filter(value => value > 0)//soma só as entradas(maior que zero)
         .reduce((accumulator, value) => accumulator + value, 0)
@@ -70,6 +99,10 @@ const init = () => {
     ul.innerHTML = "";//preciso zerar a ul pra não duplicar sempre que a init for chamada
     data_transactions.forEach(add_transaction)
     updateBalance()
+    form_add.style.display = "none";
+    modal_add.style.display = "none";
+    modal_edit.style.display = "none";
+
 }
 init()
 
@@ -97,7 +130,7 @@ add_btn.addEventListener("click", (e) => {
             amount: Number(_input_amount),
             date: _input_date
         }
-        
+
         data_transactions.push(transaction)
         init()
 
