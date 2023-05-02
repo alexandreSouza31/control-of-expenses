@@ -32,7 +32,7 @@ function getSavedData() {
     let _transactions_data = localStorage.getItem("transaction");
     _transactions_data = JSON.parse(_transactions_data)
     
-     return _transactions_data.length? _transactions_data:[
+     return _transactions_data && _transactions_data.length? _transactions_data:[
         { id: 1, description: "salário", amount: 3000, date: "01-11-2022" },
         { id: 3, description: "lanche", amount: -70, date: "10-04-2023" },
     ]
