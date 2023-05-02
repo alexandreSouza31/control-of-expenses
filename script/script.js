@@ -37,31 +37,32 @@ const deleteTransactions = id => {
 
 const editTransaction = (id) => {
 
-    let test = data_transactions.filter(transaction => transaction.id == id)
+    let data = data_transactions.filter(transaction => transaction.id == id)
     modal_edit.style.display = "flex";
-    edit_description.value = test[0].description
-    edit_amount.value = test[0].amount
-    edit_date.value = test[0].date
-    console.log(test[0].amount)
+    edit_description.value = data[0].description
+    edit_amount.value = data[0].amount
+    edit_date.value = data[0].date
+    console.log(data[0].amount)
     updateBalance()
 
-    save_btn.addEventListener("click", () => {
-        test = data_transactions.filter(transaction => transaction.id == id)
-        console.log(test[0].description)
-        test[0].description = edit_description.value;
-        test[0].amount = Number(edit_amount.value);
-        test[0].date = edit_date.value;
+    const handleClick = () => {
+        data = data_transactions.filter(transaction => transaction.id == id)
+        console.log(data[0].description)
+        data[0].description = edit_description.value;
+        data[0].amount = Number(edit_amount.value);
+        data[0].date = edit_date.value;
         modal_edit.style.display = "none";
         init()
-
-    })
+        save_btn.removeEventListener("click", handleClick)
+    }
+    save_btn.addEventListener("click", handleClick)
 }
 
 const cancelEdit= () => {
     modal_add.style.display = "none";
     modal_edit.style.display = "none";
     form_add.style.display = "none"
-    test = ""
+    data = ""
 }
 
 
