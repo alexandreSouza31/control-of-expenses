@@ -43,17 +43,37 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.c
             </div>
             
         </section>
-    
-        <form action="#" class="form-add-transactions">
-            <label for="description">Descrição</label>
-            <input type="text" class="description">
-            <label for="amount">Valor</label>
-            <input type="number"  class="amount">
-            <label for="date">Data</label>
-            <input type="date" class="date">
-            <!-- <i class="bi bi-plus-square add-btn"></i> -->
-            <button class="add-btn">add</button>
-        </form>
+        <button class="new">adicionar novo</button>
+        <dialog class="modal-add">
+            <form action="#" class="form-add-transactions">
+                <label for="description">Descrição</label>
+                <input type="text" class="description">
+                <label for="amount">Valor</label>
+                <input type="number"  class="amount">
+                <label for="date">Data</label>
+                <input type="date" class="date">
+                <div class="container-button">
+                    <i class="bi bi-check-circle add-btn"></i>
+                    <i class="bi bi-x-circle cancel-btn"  onclick="cancelEdit()"></i>
+                </div>
+            </form>
+        </dialog>
+        </div>
+        <dialog class="modal-edit">
+            <div class="edit">
+                <label for="edit-description">Editar</label>
+                <input type="text" class="edit-description">
+                <label for="edit-amount">Valor</label>
+                <input type="number"  class="edit-amount">
+                <label for="edit-date">Data</label>
+                <input type="date" class="edit-date">
+                <div class="container-button">
+                    <i class="bi bi-check-circle save-btn"></i>
+                    <i class="bi bi-x-circle cancel-edit-btn" onclick="cancelEdit()"></i>
+                </div>
+            </div>
+            
+        </dialog>
 
         <section class="container-show-transactions">
             <ul class="transactions">
@@ -63,6 +83,12 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.c
 
     </main>
     <footer>
+        <a href="https://discord.com/channels/@me/831222330206322699" target="_blank">
+            <img src="https://img.shields.io/badge/-Discord-%23E4405F?style=for-the-badge&logo=discord&logoColor=white" target="_blank">
+        </a>
+        <a href="https://www.linkedin.com/in/alexandremariano31/" target="_blank">
+            <img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank">
+        </a> 
         <p class="copyright">&copy Alexandre Mariano | 2023-Todos os direitos reservados</p>
     </footer>
     <!--script do bootstrap-->

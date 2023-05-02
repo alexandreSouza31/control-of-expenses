@@ -7,16 +7,18 @@ let input_description = document.querySelector(".description");
 let input_amount = document.querySelector(".amount");
 let input_date = document.querySelector(".date");
 let add_btn = document.querySelector(".add-btn");
+const cancel_btn = document.querySelector(".cancel-btn");
 let ul = document.querySelector(".transactions");
 
-
+const new_btn = document.querySelector(".new")
+let modal_add = document.querySelector(".modal-add");
 let modal_edit = document.querySelector(".modal-edit");
 let form_add = document.querySelector(".form-add-transactions");
-const edit_input = document.querySelector(".edit-input");
+const edit_description = document.querySelector(".edit-description");
 const edit_amount = document.querySelector(".edit-amount");
 const edit_date = document.querySelector(".edit-date");
 const save_btn = document.querySelector(".save-btn");
-const cancel_btn = document.querySelector(".cancel-btn");
+const cancel_edit_btn = document.querySelector(".cancel-edit-btn");
 
 
 //criar uma array fictícia, chumbada inicialmente
@@ -37,20 +39,37 @@ const editTransaction = (id) => {
 
     let test = data_transactions.filter(transaction => transaction.id == id)
     modal_edit.style.display = "flex";
-    edit_input.value = test[0].description
+    edit_description.value = test[0].description
     edit_amount.value = test[0].amount
-    edit_date.value=test[0].date
+    edit_date.value = test[0].date
+    console.log(test[0].amount)
+    updateBalance()
 
     save_btn.addEventListener("click", () => {
-        test[0].description = edit_input.value;
-        test[0].amount = edit_amount.value;
+        test = data_transactions.filter(transaction => transaction.id == id)
+        console.log(test[0].description)
+        test[0].description = edit_description.value;
+        test[0].amount = Number(edit_amount.value);
         test[0].date = edit_date.value;
         modal_edit.style.display = "none";
-
         init()
-        test = ""
+
     })
 }
+
+const cancelEdit= () => {
+    modal_add.style.display = "none";
+    modal_edit.style.display = "none";
+    form_add.style.display = "none"
+    test = ""
+}
+
+
+new_btn.addEventListener("click", () => {
+    modal_add.style.display = "flex";
+    form_add.style.display = "flex"
+})
+
 
 const add_transaction = transaction => {
     let trash = `<i class="bi bi-trash3" onClick='deleteTransactions(${transaction.id})' style:"z-index=1"></i>`;
