@@ -25,14 +25,27 @@ const save_btn = document.querySelector(".save-btn");
 const cancel_edit_btn = document.querySelector(".cancel-edit-btn");
 
 
-//criar uma array fictícia, chumbada inicialmente
-let data_transactions = [
-    { id: 1, description: "salário", amount: 3000, date: "01-11-2022" },
-    { id: 2, description: "mochila", amount: -200, date: "01-04-2023" },
+//recupera transações no localstorage
+let data_transactions = getSavedData();
 
-    { id: 3, description: "lanche", amount: -70, date: "10-04-2023" },
+function getSavedData() {
+    let _transactions_data = localStorage.getItem("transaction");
+    _transactions_data = JSON.parse(_transactions_data)
+    
+     return _transactions_data.length? _transactions_data:[
+        { id: 1, description: "salário", amount: 3000, date: "01-11-2022" },
+        { id: 3, description: "lanche", amount: -70, date: "10-04-2023" },
+    ]
+   
+}
 
-]
+//modifica as transações no localstorage
+function setNewData() {
+    localStorage.setItem("transaction",JSON.stringify(data_transactions))
+}
+
+setNewData()
+
 const deleteTransactions = id => {
     //vai retornar pelo filtro todas as transações que têm id diferente do id clicado.
     data_transactions = data_transactions.filter(transaction => transaction.id !== id)
@@ -142,6 +155,7 @@ const init = () => {
     form_add.style.display = "none";
     modal_add.style.display = "none";
     modal_edit.style.display = "none";
+    setNewData()
 
 }
 init()
