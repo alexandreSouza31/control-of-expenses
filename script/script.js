@@ -1,4 +1,8 @@
 //referenciar os elementos do html no js
+let modal_alert = document.querySelector(".modal-alert");
+let alert_danger = document.querySelector(".alert-danger");
+let alert_success = document.querySelector(".alert-success");
+
 let total_incomes = document.querySelector(".total-incomes");
 let total_expenses = document.querySelector(".total-expenses");
 let balance = document.querySelector(".balance");
@@ -32,6 +36,9 @@ let data_transactions = [
 const deleteTransactions = id => {
     //vai retornar pelo filtro todas as transações que têm id diferente do id clicado.
     data_transactions = data_transactions.filter(transaction => transaction.id !== id)
+    const CSSClass = balance.value < 0 ? "minus" : "plus";
+    balance.classList.toggle(CSSClass)
+    successMessage()
     init()
 }
 
@@ -39,26 +46,37 @@ const editTransaction = (id) => {
 
     let data = data_transactions.filter(transaction => transaction.id == id)
     modal_edit.style.display = "flex";
-    edit_description.value = data[0].description
-    edit_amount.value = data[0].amount
-    edit_date.value = data[0].date
-    console.log(data[0].amount)
+    edit_description.value = data[0].description;
+    edit_amount.value = data[0].amount;
+    edit_date.value = data[0].date;
     updateBalance()
 
+
     const handleClick = () => {
+        const _edit_description = edit_description.value;
+        const _edit_amount = edit_amount.value;
+        const _edit_date = edit_date.value;
+
+        if (_edit_description == "" || _edit_amount == "" || _edit_date == "") {
+
+            errorMessage()
+            return
+        }
         data = data_transactions.filter(transaction => transaction.id == id)
         console.log(data[0].description)
         data[0].description = edit_description.value;
         data[0].amount = Number(edit_amount.value);
         data[0].date = edit_date.value;
         modal_edit.style.display = "none";
-        init()
+        successMessage()
+        init();
         save_btn.removeEventListener("click", handleClick)
     }
     save_btn.addEventListener("click", handleClick)
+
 }
 
-const cancelEdit= () => {
+const cancelEdit = () => {
     modal_add.style.display = "none";
     modal_edit.style.display = "none";
     form_add.style.display = "none"
@@ -100,6 +118,8 @@ const updateBalance = () => {//atualiza as informações gerais de despesas e re
         .reduce((accumulator, transaction) => accumulator + transaction, 0)
         .toFixed(2);
     balance.innerHTML = total_amount;
+    const CSSClass = total_amount < 0 ? "minus" : "plus";
+    balance.classList.toggle(CSSClass);
 
     const income_amount = transactions_amounts
         .filter(value => value > 0)//soma só as entradas(maior que zero)
@@ -139,24 +159,42 @@ add_btn.addEventListener("click", (e) => {
     const _input_description = input_description.value;
     const _input_amount = input_amount.value;
     const _input_date = input_date.value;
+
     if (_input_description == "" || _input_amount == "" || _input_date == "") {
-        alert("preencha")
-        return
-
-    } else {
-        let transaction = {
-            id: generateId(),
-            description: _input_description,
-            amount: Number(_input_amount),
-            date: _input_date
-        }
-
-        data_transactions.push(transaction)
-        init()
-
-        alert("cadastro realizado")
+        errorMessage()
         return
     }
+    let transaction = {
+        id: generateId(),
+        description: _input_description,
+        amount: Number(_input_amount),
+        date: _input_date
+    }
+    data_transactions.push(transaction)
+    init()
+
+    successMessage()
+    return
+
 })
+
+const errorMessage = () => {
+    modal_alert.classList.remove("hidden");
+    alert_danger.classList.remove("hidden");
+    alert_danger.innerHTML = "preencha os dados corretamente!"
+    setTimeout(() => {
+        modal_alert.classList.add("hidden");
+        alert_danger.classList.add("hidden");
+    }, 2000)
+}
+const successMessage = () => {
+    modal_alert.classList.remove("hidden");
+    alert_success.classList.remove("hidden");
+    alert_success.innerHTML = "sucesso!"
+    setTimeout(() => {
+        modal_alert.classList.add("hidden");
+        alert_success.classList.add("hidden");
+    }, 2000)
+}
 
 
