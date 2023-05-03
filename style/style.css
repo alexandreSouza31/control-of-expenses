@@ -119,11 +119,17 @@ i:hover {
     align-items: center;
 }
 
-.separete {
+.separateW {
     width: 1px;
     background-color: grey;
 }
 
+.separateH{
+    width: 80vw;
+    height: 1px;
+    background-color: grey;
+    margin-top: 20px;
+}
 .new {
     margin: 20% auto 20% auto;
     border-radius: 4px;
@@ -191,11 +197,13 @@ input:focus {
     flex-direction: column;
     justify-content: space-between;
     width: 90vw;
+    box-shadow: 2px 2px 15px rgba(77, 77, 77, .5);
+    border-radius: 4px;
 
 }
 
 ul {
-    padding: 0;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -209,7 +217,7 @@ li {
     justify-content: space-between;
     align-items: center;
     /* margin: 5px auto; */
-    width: 90vw;
+    width: 85vw;
     border-bottom: 1px solid grey;
 
 }

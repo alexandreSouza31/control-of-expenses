@@ -35,7 +35,7 @@
     li {
         justify-content: space-between;
         align-items: center;
-        width: 80vw;
+        width: 77vw;
     }
 
 
@@ -77,7 +77,7 @@
     li {
         justify-content: space-between;
         align-items: center;
-        width: 60vw;
+        width: 59vw;
     }
 
     .edit {
@@ -98,13 +98,13 @@
 
     .container-show-transactions {
         justify-content: space-between;
-        width: 50vw;
+        width: 60vw;
     }
 
     li {
         justify-content: space-between;
         align-items: center;
-        width: 50vw;
+        width: 59vw;
     }
 
 }
