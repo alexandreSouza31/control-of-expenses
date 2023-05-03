@@ -40,15 +40,32 @@ body {
     z-index: 1;
 }
 
-.hidden{
+.question{
+    background-color: #F5F5F5;
+    color: black;
+    padding: 10px;   
+    font-size: 1.3rem;
+    word-break: break-all;
+   
+}
+.hidden {
     display: none;
 }
 
 h1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-top: 20px;
     padding: 10px;
+    background-color: #363636;
+    color: whitesmoke;
+    width: 100vw;
 }
 
+.bi-question-circle{
+    font-size: 40px;
+}
 main {
     flex-grow: 1;
     display: flex;
@@ -65,11 +82,20 @@ main {
     font-weight: bold;
 }
 
+button:hover,
+i:hover {
+    cursor: pointer;
+}
+
 .container-total p,
 .container-total .balance {
     padding: 5px;
     font-size: 1.3rem;
     margin: 0;
+}
+
+.balance{
+    color: dodgerblue;
 }
 
 .container-total span {
@@ -109,7 +135,10 @@ main {
     display: none;
     width: 100vw;
     height: 100vh;
+    top: 0;
+    bottom: 0;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.5);
 }
@@ -132,6 +161,12 @@ input {
     border: none;
     border-bottom: 1px solid grey;
     background-color: transparent;
+    padding: 10px;
+    width: 100%;
+}
+label{
+    padding: 5px;
+    font-weight: bold;
 }
 
 input:focus {
@@ -217,7 +252,9 @@ span {
 }
 
 .save-btn,
-.cancel-btn,.add-btn,.cancel-edit-btn {
+.cancel-btn,
+.add-btn,
+.cancel-edit-btn {
     font-size: 30px;
     margin: 20px auto;
     padding: 10px;
@@ -238,6 +275,19 @@ span {
 }
 
 footer {
-    width: 90vw;
+    width: 100vw;
     text-align: center;
+    
+    background-color: #363636;
+    color: whitesmoke;
+
+}
+
+footer a{
+    position: relative;
+    top:10px;
+    
+}
+footer p{
+    margin-top: 10px;
 }

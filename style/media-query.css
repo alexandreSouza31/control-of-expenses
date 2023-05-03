@@ -1,0 +1,110 @@
+/* other devices */
+@charset "UTF-8";
+
+@media only screen and (min-width: 500px) {
+
+    /* other devices */
+
+    * {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1rem;
+        box-sizing: border-box;
+    }
+
+    main {
+        width: 60vw;
+    }
+
+    .container-incomes-exepenses {
+        width: 60vw;
+    }
+
+    .new {
+        margin: 10% auto 10% auto;
+    }
+
+    .form-add-transactions {
+        width: 50vw;
+    }
+
+    .container-show-transactions {
+        justify-content: space-between;
+        width: 80vw;
+    }
+
+    li {
+        justify-content: space-between;
+        align-items: center;
+        width: 80vw;
+    }
+
+
+    span {
+        font-size: 1.1rem;
+    }
+
+    .span-description,
+    .span-amount {
+        width: 25%;
+        word-break: break-all;
+    }
+
+    .edit {
+        width: 50vw;
+    }
+
+    .container-button {
+        width: 30vw;
+    }
+
+}
+
+@media only screen and (min-width: 1200px) {
+
+    .new {
+        margin: 10% auto 10% auto;
+    }
+
+    .form-add-transactions {
+        width: 600px;
+    }
+
+    .container-show-transactions {
+        justify-content: space-between;
+        width: 60vw;
+    }
+
+    li {
+        justify-content: space-between;
+        align-items: center;
+        width: 60vw;
+    }
+
+    .edit {
+        width: 50vw;
+    }
+
+}
+
+@media only screen and (min-width: 1390px) {
+
+    .new {
+        margin: 10% auto 10% auto;
+    }
+
+    .form-add-transactions {
+        width: 50vw;
+    }
+
+    .container-show-transactions {
+        justify-content: space-between;
+        width: 50vw;
+    }
+
+    li {
+        justify-content: space-between;
+        align-items: center;
+        width: 50vw;
+    }
+
+}
