@@ -11,7 +11,6 @@ let input_description = document.querySelector(".description");
 let input_amount = document.querySelector(".amount");
 let input_date = document.querySelector(".date");
 let add_btn = document.querySelector(".add-btn");
-const cancel_btn = document.querySelector(".cancel-btn");
 let ul = document.querySelector(".transactions");
 
 const new_btn = document.querySelector(".new")
@@ -22,8 +21,6 @@ const edit_description = document.querySelector(".edit-description");
 const edit_amount = document.querySelector(".edit-amount");
 const edit_date = document.querySelector(".edit-date");
 const save_btn = document.querySelector(".save-btn");
-const cancel_edit_btn = document.querySelector(".cancel-edit-btn");
-
 
 //recupera transações no localstorage
 let data_transactions = getSavedData();
@@ -31,12 +28,12 @@ let data_transactions = getSavedData();
 function getSavedData() {
     let _transactions_data = localStorage.getItem("transaction");
     _transactions_data = JSON.parse(_transactions_data)
-    
-     return _transactions_data && _transactions_data.length? _transactions_data:[
+
+    return _transactions_data && _transactions_data.length ? _transactions_data : [
         { id: 1, description: "salário", amount: 3000, date: "01-11-2022" },
         { id: 3, description: "lanche", amount: -70, date: "10-04-2023" },
     ]
-   
+
 }
 
 //modifica as transações no localstorage
@@ -49,8 +46,6 @@ setNewData()
 const deleteTransactions = id => {
     //vai retornar pelo filtro todas as transações que têm id diferente do id clicado.
     data_transactions = data_transactions.filter(transaction => transaction.id !== id)
-    const CSSClass = balance.value < 0 ? "minus" : "plus";
-    balance.classList.toggle(CSSClass)
     successMessage()
     init()
 }
@@ -85,6 +80,7 @@ const editTransaction = (id) => {
         init();
         save_btn.removeEventListener("click", handleClick)
     }
+
     save_btn.addEventListener("click", handleClick)
 
 }
@@ -92,6 +88,8 @@ const editTransaction = (id) => {
 const cancelEdit = () => {
     modal_add.style.display = "none";
     modal_edit.style.display = "none";
+    question.classList.add("hidden")
+    modal_alert.classList.add("hidden")
     form_add.style.display = "none"
     data = ""
 }
@@ -121,6 +119,7 @@ const add_transaction = transaction => {
         </li>
         `
     ul.prepend(li);//prepend: mais nova em cima. append: mais antigas em cima
+
 }
 
 
@@ -131,8 +130,6 @@ const updateBalance = () => {//atualiza as informações gerais de despesas e re
         .reduce((accumulator, transaction) => accumulator + transaction, 0)
         .toFixed(2);
     balance.innerHTML = total_amount;
-    const CSSClass = total_amount < 0 ? "minus" : "plus";
-    balance.classList.toggle(CSSClass);
 
     const income_amount = transactions_amounts
         .filter(value => value > 0)//soma só as entradas(maior que zero)
@@ -155,8 +152,8 @@ const init = () => {
     form_add.style.display = "none";
     modal_add.style.display = "none";
     modal_edit.style.display = "none";
-    setNewData()
 
+    setNewData();
 }
 init()
 
@@ -212,3 +209,10 @@ const successMessage = () => {
 }
 
 
+const question_icon = document.querySelector("#question-icon");
+const question = document.querySelector(".question");
+question_icon.addEventListener("click", () => {
+    question.classList.remove("hidden")
+    modal_alert.classList.remove("hidden")
+    console.log("clicou")
+})
