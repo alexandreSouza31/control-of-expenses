@@ -63,7 +63,7 @@ Mobile first, clean code, refactoring, localstorage.
 ```
 
 
-### Useful resources                  alterar descriçoes!!!!!
+### Useful resources
 
 - [Bootstrap](https://getbootstrap.com/) - used for icons and alerts.
 
