@@ -70,8 +70,18 @@ Mobile first, clean code, refactoring, localstorage.
 
 ### How to run the code? 
 
+Cloning/downloading the project
 
-you can download it to your machine and open the index.html in the code editor.
+Enter the command```git clone https://github.com/alexandreSouza31/control-of-expenses``` in the terminal, or if you prefer, download it by clicking on the green button called "Code" in this project's repository, and then, "Download zip.
+
+run index.html
+
+#### Deploy
+
+If you want to see the application running without having to download it, go to
+- [Vercel](https://control-of-expenses.vercel.app/) - Website used to host the application.
+
+
 If you get a Json error due to local storage, comment out lines 26-37 of script.js and add below line 37: 
 
 let data_transactions =[
@@ -81,10 +91,8 @@ let data_transactions =[
 
 Note that this is a local storage bug with Chrome, so by doing this your app will not work on local storage.
 
-If you want to test the app without downloading the code:
-https://control-of-expenses.vercel.app/
-
- :)
+:)
+ 
 ## Author
 
 - LinkdIn - Alexandre Mariano(https://www.linkedin.com/in/alexandresouza31/)
